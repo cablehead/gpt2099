@@ -13,10 +13,10 @@ export const themes = {
         "browser_theme_color": "#110000",
       },
       "vars": {
-        "background": "#110000",
-        "foreground": "#ddddcc",
-        "foreground-reverse": "#1a1c1e",
-        "background-reverse": "#C0D4EE",
+        "background": "#09304a",
+        "foreground": "#f9f3bf",
+        "foreground-reverse": "#09304a",
+        "background-reverse": "#f9f3bf",
       },
     },
     "light": {
@@ -26,8 +26,10 @@ export const themes = {
         "browser_theme_color": "#f5f5f5",
       },
       "vars": {
-        "background": "#f5f5f5",
-        "foreground": "#1d1f21",
+        "background": "#ffffff",
+        "foreground": "#634535",
+        "foreground-reverse": "#ffffff",
+        "background-reverse": "#634535",
       },
     },
   },
