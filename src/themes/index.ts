@@ -13,10 +13,10 @@ export const themes = {
         "browser_theme_color": "#110000",
       },
       "vars": {
-        "background": "#09304a",
-        "foreground": "#f9f3bf",
-        "foreground-reverse": "#09304a",
-        "background-reverse": "#f9f3bf",
+        "background": "#1D202E",
+        "foreground": "#C5C8CE",
+        "foreground-reverse": "#1D202E",
+        "background-reverse": "#C5C8CE",
       },
     },
     "light": {
