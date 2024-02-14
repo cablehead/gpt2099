@@ -1,0 +1,20 @@
+.card {
+  cursor: pointer;
+  border: 2px solid var(--stp-background-reverse-alpha_secondary);
+  box-shadow: var(--stp-background-reverse-alpha_tertiary) 0px 5px 7px -2px,
+    var(--stp-background-reverse-alpha_quaternary) 0px 2px 3px -1px;
+  border-radius: 0.25em;
+  padding: 1em;
+  transition: 0.3s;
+
+  &:hover {
+    background: var(--stp-highlight);
+
+    box-shadow: var(--stp-background-reverse-alpha_tertiary) 0px 20px 25px -5px,
+      var(--stp-background-reverse-alpha_quaternary) 0px 10px 10px -5px;
+  }
+
+  &.selected {
+    background: var(--stp-selected);
+  }
+}
