@@ -12,8 +12,6 @@ const App: Component = () => {
     focus: 0,
   });
 
-  console.log(store);
-
   return (
     <div style="display: flex; flex-direction: column; gap: 1em;">
       <div style="display: flex; gap: 1em; justify-content: flex-end;">
@@ -22,7 +20,17 @@ const App: Component = () => {
 
       <div style="display: flex; gap: 1em;">
         <For each={store.cards}>
-          {(card) => <div>{card}</div>}
+          {(card, index) => (
+            <div
+              onClick={() => setStore("focus", index())}
+              classList={{
+                [s.card]: true,
+                [s.selected]: store.focus === index(),
+              }}
+            >
+              {card}
+            </div>
+          )}
         </For>
       </div>
     </div>
