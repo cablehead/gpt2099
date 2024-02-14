@@ -6,6 +6,7 @@
   background: var(--stp-background);
   color: var(--stp-foreground);
   vertical-align: top;
+  transition: 0.3s;
 
   .icon,
   .text {
@@ -30,5 +31,7 @@
   &:hover {
     background: var(--stp-background-reverse);
     color: var(--stp-foreground-reverse);
+    box-shadow: var(--stp-background-reverse-alpha_tertiary) 0px 10px 15px -3px,
+      var(--stp-background-reverse-alpha_quaternary) 0px 4px 6px -2px;
   }
 }

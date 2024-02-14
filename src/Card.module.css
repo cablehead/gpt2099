@@ -1,7 +1,0 @@
-.card {
-  border: 2px solid var(--stp-background-reverse-alpha_secondary);
-  box-shadow: var(--stp-background-reverse-alpha_tertiary) 0px 10px 15px -3px,
-    var(--stp-background-reverse-alpha_quaternary) 0px 4px 6px -2px;
-  border-radius: 0.25em;
-  padding: 1em;
-}
