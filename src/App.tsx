@@ -1,7 +1,9 @@
-import { Component, For, onCleanup } from "solid-js";
+import { Component, For, onCleanup, Show } from "solid-js";
 import { createStore } from "solid-js/store";
 
 import { ThemeProvider } from "solid-theme-provider";
+
+import Editor from "./Editor";
 
 import { calculate_variants, styles, themes } from "./themes";
 import { matchKeyEvent } from "./util";
@@ -11,16 +13,20 @@ const App: Component = () => {
   const [store, setStore] = createStore({
     cards: ["Card 1", "Card 2", "Card 3"],
     focus: 0,
+    isEdit: false,
   });
 
   const handleKeyPress = (event: KeyboardEvent) => {
     switch (true) {
+      // Enter - sets isEdit to true
+      case matchKeyEvent(event, { code: "Enter" }):
+        setStore("isEdit", true);
+        return;
       // Right
       case matchKeyEvent(event, { code: "KeyL" }):
       case matchKeyEvent(event, { code: "ArrowRight" }):
-        setStore(
-          "focus",
-          (prev) => prev < store.cards.length - 1 ? prev + 1 : prev,
+        setStore("focus", (prev) =>
+          prev < store.cards.length - 1 ? prev + 1 : prev
         );
         return;
       // Left
@@ -54,46 +60,10 @@ const App: Component = () => {
               </div>
             )}
           </For>
-
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              background: "transparent",
-              "z-index": 1000,
-              position: "absolute",
-              top: 0,
-              left: 0,
-              padding: "0.5em",
-            }}
-          >
-            <div
-              style={{
-                padding: "2ch",
-                "border-radius": "0.5rem",
-                // width: "calc(100% - 2ch)",
-                height: "calc(100%)",
-                // boxShadow: "0 0 6px " + vars.shadowColor,
-                "box-shadow": "0 0 6px var(--stp-background-reverse-a3)",
-                background: "var(--stp-background-a1)",
-              }}
-            >
-              <textarea
-                spellcheck={false}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  resize: "none",
-                  outline: "none",
-                  border: "none",
-                }}
-                placeholder="..."
-              >
-                hai
-              </textarea>
-            </div>
-          </div>
         </div>
+        <Show when={store.isEdit}>
+          <Editor />
+        </Show>
       </div>
       <div style="display: flex;  align-items: center; justify-content: space-between; padding-top: 0.5em; border-top: 1px dotted var(--stp-foreground-a3);">
         <div>gpt2099</div>
