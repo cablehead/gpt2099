@@ -37,29 +37,30 @@ const App: Component = () => {
   });
 
   return (
-    <div style="display: flex; flex-direction: column; gap: 1em;">
+    <div style="display: flex; flex-direction: column; gap: 1em; height:100%;">
+      <div style="flex-grow: 1;">
+        <div style="display: flex; gap: 1em;">
+          <For each={store.cards}>
+            {(card, index) => (
+              <div
+                onClick={() => setStore("focus", index())}
+                classList={{
+                  [s.card]: true,
+                  [s.selected]: store.focus === index(),
+                }}
+              >
+                {card}
+              </div>
+            )}
+          </For>
+        </div>
+      </div>
       <div style="display: flex; gap: 1em; justify-content: flex-end;">
         <ThemeProvider
           calculate_variants={calculate_variants}
           themes={themes}
           styles={styles}
         />
-      </div>
-
-      <div style="display: flex; gap: 1em;">
-        <For each={store.cards}>
-          {(card, index) => (
-            <div
-              onClick={() => setStore("focus", index())}
-              classList={{
-                [s.card]: true,
-                [s.selected]: store.focus === index(),
-              }}
-            >
-              {card}
-            </div>
-          )}
-        </For>
       </div>
     </div>
   );
