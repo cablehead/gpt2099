@@ -18,9 +18,8 @@ const App: Component = () => {
       // Right
       case matchKeyEvent(event, { code: "KeyL" }):
       case matchKeyEvent(event, { code: "ArrowRight" }):
-        setStore(
-          "focus",
-          (prev) => (prev < store.cards.length - 1 ? prev + 1 : prev),
+        setStore("focus", (prev) =>
+          prev < store.cards.length - 1 ? prev + 1 : prev
         );
         return;
       // Left

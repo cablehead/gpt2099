@@ -9,7 +9,7 @@ interface MatchKeyOptions {
 
 export function matchKeyEvent(
   event: KeyboardEvent,
-  options: MatchKeyOptions,
+  options: MatchKeyOptions
 ): boolean {
   return (
     (!options.key || event.key === options.key) &&
