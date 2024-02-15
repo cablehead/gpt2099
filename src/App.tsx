@@ -16,15 +16,24 @@ const App: Component = () => {
     isEdit: false,
   });
 
+  const closeEditor = (text?: string) => {
+    if (text !== undefined) {
+      setStore("cards", store.focus, text);
+    }
+    setStore("isEdit", false);
+  };
+
   const handleKeyPress = (event: KeyboardEvent) => {
     switch (true) {
       // Enter - sets isEdit to true
-      case matchKeyEvent(event, { code: "Enter" }):
+      case matchKeyEvent(event, { meta: true, code: "Enter" }):
+        event.preventDefault();
         setStore("isEdit", true);
         return;
       // Right
       case matchKeyEvent(event, { code: "KeyL" }):
       case matchKeyEvent(event, { code: "ArrowRight" }):
+        event.preventDefault();
         setStore("focus", (prev) =>
           prev < store.cards.length - 1 ? prev + 1 : prev
         );
@@ -32,6 +41,7 @@ const App: Component = () => {
       // Left
       case matchKeyEvent(event, { code: "KeyH" }):
       case matchKeyEvent(event, { code: "ArrowLeft" }):
+        event.preventDefault();
         setStore("focus", (prev) => (prev > 0 ? prev - 1 : 0));
         return;
     }
@@ -62,7 +72,7 @@ const App: Component = () => {
           </For>
         </div>
         <Show when={store.isEdit}>
-          <Editor />
+          <Editor text={store.cards[store.focus]} fin={closeEditor} />
         </Show>
       </div>
       <div style="display: flex;  align-items: center; justify-content: space-between; padding-top: 0.5em; border-top: 1px dotted var(--stp-foreground-a3);">

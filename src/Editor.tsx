@@ -1,6 +1,17 @@
-import { Component } from "solid-js";
+import { Component, onMount } from "solid-js";
 
-const Editor: Component = () => {
+import { matchKeyEvent } from "./util";
+
+const Editor: Component<{ text: string; fin: (text?: string) => void }> = (
+  props
+) => {
+  let textareaRef: HTMLTextAreaElement | undefined;
+
+  onMount(() => {
+    if (!textareaRef) return;
+    textareaRef.focus();
+  });
+
   return (
     <div
       style={{
@@ -24,6 +35,7 @@ const Editor: Component = () => {
         }}
       >
         <textarea
+          ref={textareaRef}
           spellcheck={false}
           style={{
             width: "100%",
@@ -33,9 +45,26 @@ const Editor: Component = () => {
             border: "none",
           }}
           placeholder="..."
-        >
-          hai
-        </textarea>
+          value={props.text}
+          onKeyDown={(event: KeyboardEvent) => {
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            if (!textareaRef) return;
+
+            console.log(event);
+
+            switch (true) {
+              case matchKeyEvent(event, { meta: true, code: "Enter" }):
+                event.preventDefault();
+                props.fin(textareaRef.value);
+                return;
+              case matchKeyEvent(event, { code: "Escape" }):
+                event.preventDefault();
+                props.fin();
+                return;
+            }
+          }}
+        />
       </div>
     </div>
   );
