@@ -38,7 +38,7 @@ const App: Component = () => {
 
   return (
     <div style="display: flex; flex-direction: column; gap: 1em; height:100%;">
-      <div style="flex-grow: 1;">
+      <div style="flex-grow: 1; position: relative;">
         <div style="display: flex; gap: 1em;">
           <For each={store.cards}>
             {(card, index) => (
@@ -53,9 +53,48 @@ const App: Component = () => {
               </div>
             )}
           </For>
+
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              background: "transparent",
+              "z-index": 1000,
+              position: "absolute",
+              top: 0,
+              left: 0,
+              padding: "0.5em",
+            }}
+          >
+            <div
+              style={{
+                padding: "2ch",
+                "border-radius": "0.5rem",
+                // width: "calc(100% - 2ch)",
+                height: "calc(100%)",
+                // boxShadow: "0 0 6px " + vars.shadowColor,
+                background: "var(--stp-background)",
+                border: "1px dotted white",
+              }}
+            >
+              <textarea
+                spellcheck={false}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  resize: "none",
+                  outline: "none",
+                  border: "none",
+                }}
+                placeholder="..."
+              >
+                hai
+              </textarea>
+            </div>
+          </div>
         </div>
       </div>
-      <div style="display: flex;  align-items: center; justify-content: space-between;">
+      <div style="display: flex;  align-items: center; justify-content: space-between; border: 1px dotted white;">
         <div>gpt2099</div>
 
         <div style="display: flex; justify-content: flex-end;">
