@@ -3,7 +3,7 @@ import { createStore } from "solid-js/store";
 
 import { ThemeProvider } from "solid-theme-provider";
 
-import { styles, themes } from "./themes";
+import { calculate_variants, styles, themes } from "./themes";
 import s from "./Card.module.scss";
 
 const App: Component = () => {
@@ -15,7 +15,11 @@ const App: Component = () => {
   return (
     <div style="display: flex; flex-direction: column; gap: 1em;">
       <div style="display: flex; gap: 1em; justify-content: flex-end;">
-        <ThemeProvider themes={themes} styles={styles} />
+        <ThemeProvider
+          calculate_variants={calculate_variants}
+          themes={themes}
+          styles={styles}
+        />
       </div>
 
       <div style="display: flex; gap: 1em;">

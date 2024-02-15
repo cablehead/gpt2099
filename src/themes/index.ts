@@ -36,3 +36,18 @@ export const themes = {
     },
   },
 };
+
+export const calculate_variants = (name: string, value: string) => {
+  // if the current value is a hex color
+  // add complementary transparencies
+  let pattern = /^#[0-9A-F]{6}$/i;
+  if (value.match(pattern)) {
+    return {
+      [name + "-a1"]: value + "f2", // 95%
+      [name + "-a2"]: value + "99", // 60%
+      [name + "-a3"]: value + "4d", // 30%
+      [name + "-a4"]: value + "17", // 9%
+    };
+  }
+  return {};
+};
