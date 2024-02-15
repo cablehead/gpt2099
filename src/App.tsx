@@ -14,13 +14,20 @@ const App: Component = () => {
   });
 
   const handleKeyPress = (event: KeyboardEvent) => {
-    if (matchKeyEvent(event, { key: "h" })) {
-      setStore("focus", (prev) => (prev > 0 ? prev - 1 : 0));
-    } else if (matchKeyEvent(event, { key: "l" })) {
-      setStore(
-        "focus",
-        (prev) => (prev < store.cards.length - 1 ? prev + 1 : prev),
-      );
+    switch (true) {
+      // Right
+      case matchKeyEvent(event, { code: "KeyL" }):
+      case matchKeyEvent(event, { code: "ArrowRight" }):
+        setStore(
+          "focus",
+          (prev) => (prev < store.cards.length - 1 ? prev + 1 : prev),
+        );
+        return;
+      // Left
+      case matchKeyEvent(event, { code: "KeyH" }):
+      case matchKeyEvent(event, { code: "ArrowLeft" }):
+        setStore("focus", (prev) => (prev > 0 ? prev - 1 : 0));
+        return;
     }
   };
 
