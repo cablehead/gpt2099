@@ -55,12 +55,16 @@ const App: Component = () => {
           </For>
         </div>
       </div>
-      <div style="display: flex; gap: 1em; justify-content: flex-end;">
-        <ThemeProvider
-          calculate_variants={calculate_variants}
-          themes={themes}
-          styles={styles}
-        />
+      <div style="display: flex;  align-items: center; justify-content: space-between;">
+        <div>gpt2099</div>
+
+        <div style="display: flex; justify-content: flex-end;">
+          <ThemeProvider
+            calculate_variants={calculate_variants}
+            themes={themes}
+            styles={styles}
+          />
+        </div>
       </div>
     </div>
   );
