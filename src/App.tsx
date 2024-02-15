@@ -1,15 +1,33 @@
-import { Component, For } from "solid-js";
+import { Component, For, onCleanup } from "solid-js";
 import { createStore } from "solid-js/store";
 
 import { ThemeProvider } from "solid-theme-provider";
 
 import { calculate_variants, styles, themes } from "./themes";
+import { matchKeyEvent } from "./util";
 import s from "./Card.module.scss";
 
 const App: Component = () => {
   const [store, setStore] = createStore({
     cards: ["Card 1", "Card 2", "Card 3"],
     focus: 0,
+  });
+
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (matchKeyEvent(event, { key: "h" })) {
+      setStore("focus", (prev) => (prev > 0 ? prev - 1 : 0));
+    } else if (matchKeyEvent(event, { key: "l" })) {
+      setStore(
+        "focus",
+        (prev) => (prev < store.cards.length - 1 ? prev + 1 : prev),
+      );
+    }
+  };
+
+  document.addEventListener("keydown", handleKeyPress);
+
+  onCleanup(() => {
+    document.removeEventListener("keydown", handleKeyPress);
   });
 
   return (

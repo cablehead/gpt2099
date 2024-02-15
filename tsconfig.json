@@ -13,6 +13,8 @@
     "types": ["vite/client"],
     "noEmit": true,
     "isolatedModules": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
   "include": ["src"]
 }
