@@ -18,8 +18,9 @@ const App: Component = () => {
       // Right
       case matchKeyEvent(event, { code: "KeyL" }):
       case matchKeyEvent(event, { code: "ArrowRight" }):
-        setStore("focus", (prev) =>
-          prev < store.cards.length - 1 ? prev + 1 : prev
+        setStore(
+          "focus",
+          (prev) => prev < store.cards.length - 1 ? prev + 1 : prev,
         );
         return;
       // Left
@@ -73,8 +74,8 @@ const App: Component = () => {
                 // width: "calc(100% - 2ch)",
                 height: "calc(100%)",
                 // boxShadow: "0 0 6px " + vars.shadowColor,
-                background: "var(--stp-background)",
-                border: "1px dotted white",
+                "box-shadow": "0 0 6px var(--stp-background-reverse-a3)",
+                background: "var(--stp-background-a1)",
               }}
             >
               <textarea
@@ -94,7 +95,7 @@ const App: Component = () => {
           </div>
         </div>
       </div>
-      <div style="display: flex;  align-items: center; justify-content: space-between; border: 1px dotted white;">
+      <div style="display: flex;  align-items: center; justify-content: space-between; padding-top: 0.5em; border-top: 1px dotted var(--stp-foreground-a3);">
         <div>gpt2099</div>
 
         <div style="display: flex; justify-content: flex-end;">
