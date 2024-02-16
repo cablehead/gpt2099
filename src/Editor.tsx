@@ -3,7 +3,7 @@ import { Component, onMount } from "solid-js";
 import { matchKeyEvent } from "./util";
 
 const Editor: Component<{ text: string; fin: (text?: string) => void }> = (
-  props
+  props,
 ) => {
   let textareaRef: HTMLTextAreaElement | undefined;
 
@@ -50,8 +50,6 @@ const Editor: Component<{ text: string; fin: (text?: string) => void }> = (
             event.stopPropagation();
             event.stopImmediatePropagation();
             if (!textareaRef) return;
-
-            console.log(event);
 
             switch (true) {
               case matchKeyEvent(event, { meta: true, code: "Enter" }):

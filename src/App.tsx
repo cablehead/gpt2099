@@ -1,5 +1,5 @@
 import { Component, For, Match, onCleanup, Switch } from "solid-js";
-import { createStore } from "solid-js/store";
+import { createStore, produce } from "solid-js/store";
 
 import { ThemeProvider } from "solid-theme-provider";
 
@@ -23,24 +23,53 @@ const App: Component = () => {
   });
 
   const endEdit = (text?: string) => {
-    if (text !== undefined) {
-      setStore("cards", store.focus, text);
-    }
-    setStore("mode", Mode.Main);
+    setStore(produce((state) => {
+      if (text !== undefined) {
+        state.cards[state.focus] = text;
+      }
+      state.mode = Mode.Main;
+    }));
   };
 
   const endAdd = (text?: string) => {
-    if (text !== undefined) {
-      setStore("cards", (cards) => [...cards, text]);
-      setStore("focus", store.cards.length - 1);
+    setStore(produce((state) => {
+      if (text) {
+        state.cards.push(text);
+        state.focus = state.cards.length - 1;
+      }
+      state.mode = Mode.Main;
+    }));
+  };
+
+  const emitHttpPost = async () => {
+    const focusedCard = store.cards[store.focus];
+    try {
+      const response = await fetch("/api/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ card: focusedCard }),
+      });
+
+      if (!response.ok) {
+        // Handle response error
+        console.error("HTTP Request failed", await response.text());
+      } else {
+        // Process response
+        // Process response as plain text
+        console.log("Success:", await response.text());
+      }
+    } catch (error) {
+      // Handle network error
+      console.error("HTTP Request error:", error);
     }
-    setStore("mode", Mode.Main);
   };
 
   const handleKeyPress = (event: KeyboardEvent) => {
     switch (true) {
       // Edit
-      case matchKeyEvent(event, { meta: true, code: "Enter" }):
+      case matchKeyEvent(event, { code: "Enter" }):
         event.preventDefault();
         setStore("mode", Mode.Edit);
         return;
@@ -51,7 +80,12 @@ const App: Component = () => {
         setStore("mode", Mode.Add);
         return;
 
-      // Nav Right
+      case matchKeyEvent(event, { code: "Space" }):
+        event.preventDefault();
+        emitHttpPost();
+        return;
+
+        // Nav Right
       case matchKeyEvent(event, { code: "KeyL" }):
       case matchKeyEvent(event, { code: "ArrowRight" }):
         event.preventDefault();
