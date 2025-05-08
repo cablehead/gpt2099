@@ -1,3 +1,5 @@
+See: https://github.com/cablehead/gpt2099.nu
+
 # gpt2099
 
 ![Screenshot](docs/screenshot.png)
